@@ -1,0 +1,69 @@
+---
+title: "Data Jujutsu II -- PhD Trends"
+output:
+  pdf_document:
+    keep_tex: false
+    latex_engine: pdflatex
+    template: style/readable.tex
+author:
+  name: "Stefano Allesina & Graham Smith"
+  affiliation: University of Chicago
+date: Aug 2020
+geometry: margin=1in
+fontfamily: mathpazo
+fontsize: 11pt
+spacing: single
+graphics: yes
+endnote: no
+thanks: "This document is included as part of the Advanced Computing I packet for the U Chicago BSD qBio6 boot camp 2020. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: sallesina@uchicago.edu."
+
+---
+
+```{r setup, echo=FALSE, eval=TRUE}
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE)
+```
+
+## Description of the data
+
+Every year, the National Science Foundation sponsors a very large survey (with almost complete sampling) of the PhD graduates, the *Survey of Earned Doctorates* (SED). They publish statistics on the number of PhD, and report PhD completion by gender, field, ethnic background, etc. In particular, table 16 reports the number of PhD awarded by sex and field of study. We are going to attempt reading the table directly from the `xlsx` files that are published by NSF.
+
+## The challenge
+
+1. The file `urls_and_skip_NSF_SED.csv` reports the location (`url`) of the excel files for the years 2013-1018, as well as the number of lines to skip (`skip`) and the number of lines to read (`read`) for best results. Read the documentation of `read_xlsx` from the library `readxl` to see how to read the file while skipping a few lines and capping the total number of lines to be read. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, eval=TRUE}
+library(tidyverse)
+library(readxl)
+read_csv("urls_and_skip_NSF_SED.csv")
+```
+
+  Read all the files, building the tibble `sed` with structure:
+
+```{r, eval = TRUE, message=FALSE, warning=FALSE, echo = TRUE}
+source("solution_PhD_trends.R") # this is the code you have to write!
+sed
+```
+  
+2. Write a generic function for plotting, and plot the number of PhDs in time, by taking the `All fields`:
+
+```{r, echo=TRUE, eval = TRUE}
+plot_PhD_in_time(sed, "All fields")
+```
+
+  Produce the same type of graph for the disciplines that interest you. Note that the naming of some of the fields has changed: for example, you find `Neurosciences, neurobiology` (recent years) and `Neurosciences and neurobiology` (older data sets). Modify the function such that it uses `grepl` to match a given label (`Neurosciences` in this case).
+  
+```{r, echo=TRUE, eval = TRUE}
+plot_PhD_in_time(sed, "Neurosciences")
+```
+  
+3. The graduates in some of the fields are predominantly male (e.g., `Robotics`), while in other fields most graduates are females (e.g., `Developmental and child psychology`). Find the biological field having the largest gender disparity. 
+
+4. [Optional] Find the biological field that has seen the greatest change in gender composition in time.
+
+## Hints & Nifty tricks
+
+* If you don't want to store the downloaded zip file, use a temporary file (it will be deleted by `R` automatically once you call `unlink()`)
+
+* Some lines are empty: use something like `filter(!is.na(field))` to get rid of them. 
+
+* For each year, you only need to store the number of PhD awarded to men/women; the rest of the information is redundant, and can be calculated from these two numbers.
