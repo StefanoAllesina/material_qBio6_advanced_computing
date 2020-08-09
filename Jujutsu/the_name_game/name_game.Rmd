@@ -40,22 +40,30 @@ The first column is the name (with spaces and hypens removed: `Mary-Jane` $\to$ 
 
 ## The challenge
 
-1. Write code to download, parse and organize the data, building a tibble with columns `year`, `name`, `sex`, `prop`, where `prop` is the proportion of babies with a given name for a year and sex combination.
+#### 1. Read the data
+
+Write code to download, parse and organize the data, building a tibble with columns `year`, `name`, `sex`, `prop`, where `prop` is the proportion of babies with a given name for a year and sex combination.
 
 ```{r, warning=FALSE, message=FALSE, eval = TRUE}
 source("solution_name_game.R") # this is the code **you** have to write
 all_names # store all information here
 ```
 
-2. Write a function that plots the frequency in time, and accepts an extra parameter to highlight a particular year (a vertical dashed line marks the highlighted year). For example:
+#### 2. Plot the data
+
+Write a function that plots the frequency in time, and accepts an extra parameter to highlight a particular year (a vertical dashed line marks the highlighted year). For example:
 
 ```{r, eval = TRUE}
 plot_name_in_time(data = all_names, my_name = "Hermione", highlight = 2001)
 ```
 
-3. Try to find name/year combinations where the name frequency changes significantly due to people/event in popular culture (e.g., "Harry Potter and the Sorcerer's stone" movie came out in 2001; other examples are Ariel/1989, Alanis/1995, Beyonce/1998, Neo/1999, Osama/2001, Barack/2008, Ivanka/2016, etc.). Be prepared to share the most interesting combinations with the class.
+#### 3. Dramatic changes in name frequencies
 
-4. (Optional) Certain names went from being given predominantly to boys to more frequently to girls, or vice versa. Write code to discover the most impressive transitions. For example, "Charley" was predominantly assigned to boys back in the day, while today is mostly assigned to girls:
+Try to find name/year combinations where the name frequency changes significantly due to people/event in popular culture (e.g., "Harry Potter and the Sorcerer's stone" movie came out in 2001; other examples are Ariel/1989, Alanis/1995, Beyonce/1998, Neo/1999, Osama/2001, Barack/2008, Ivanka/2016, etc.). Be prepared to share the most interesting combinations with the class.
+
+#### 4. Changes in association between name and sex [Optional]
+
+Certain names went from being given predominantly to boys to more frequently to girls, or vice versa. Write code to discover the most impressive transitions. For example, "Charley" was predominantly assigned to boys back in the day, while today is mostly assigned to girls:
 
 ```{r, eval = TRUE}
 plot_name_in_time(data = all_names, my_name = "Charley", highlight = NULL)
