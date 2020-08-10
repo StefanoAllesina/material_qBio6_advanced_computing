@@ -8,23 +8,13 @@ output:
 author:
   name: Stefano Allesina
   affiliation: University of Chicago
-date: Aug 2019
+date: Aug 2020
 geometry: margin=1in
 fontfamily: mathpazo
 fontsize: 11pt
 spacing: single
 graphics: yes
 endnote: no
-thanks: "This document is included as part of the Advanced Computing I packet for the U Chicago BSD qBio5 boot camp, @MBL, 2019. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: sallesina@uchicago.edu."
-abstract: "
-
-- **Goal:** learn how to manipulate large data sets by writing efficient, consistent, and compact code. Introduce the use of `dplyr`, `tidyr`, and the pipeline operator `%>%`. Produce beautiful graphs and figures for scientific publications using `ggplot2`.
-
-
-- **Audience:** experienced `R` users, familiar with the data type `data.frame`, loops, functions, and having some notions of data bases. 
-
-
-- **Installation:** the following packages need to be installed: `ggplot2`, `dplyr`, `tidyr`, `lubridate`, `ggthemes`"
 ---
 
 ```{r setup, echo=FALSE, eval=TRUE}
